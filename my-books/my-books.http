@@ -1,7 +1,30 @@
-@my_books_HostAddress = http://localhost:5264
+@my_books_HostAddress = https://localhost:7025
+POST {{my_books_HostAddress}}/api/books/
+Content-Type: application/json
 
-GET {{my_books_HostAddress}}/weatherforecast/
+{
+  "title": "To Kill a Mockingbird",
+  "author": "Harper Lee",
+  "description": "A novel about racial injustice in the Deep South.",
+  "isRead": false,
+  "dateRead": null,
+  "rate": null,
+  "coverUrl": "https://example.com/tokillamockingbird.jpg"
+}
+GET {{my_books_HostAddress}}/api/books/
 Accept: application/json
+
+GET {{my_books_HostAddress}}/api/books/1
+
+Accept: application/json
+
+
+
+POST {{my_books_HostAddress}}/api/books/
+Content-Type: application/json
+
+{ "title": "To Kill a Mockingbird", "author": "Harper Lee", "description": "A novel about racial injustice in the Deep South.", "isRead": false, "dateRead": null, "rate": null, "coverUrl": "https://example.com/tokillamockingbird.jpg" }
+
 
 ###
  
