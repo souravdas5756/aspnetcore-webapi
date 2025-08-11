@@ -20,7 +20,7 @@ namespace my_books.Services
             return _context.Books.ToList();
         }
         // Get Book by ID
-        public Book GetBookById(int id)
+        public Book? GetBookById(int id)
         {
             return _context.Books.FirstOrDefault(b => b.BookID == id);
         }
