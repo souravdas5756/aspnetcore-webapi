@@ -19,9 +19,9 @@ namespace my_books.Controllers
         }
         // GET: api/books
         [HttpGet("get-all-books")]
-        public IActionResult GetBooks()
+        public IActionResult GetBooks(string sortBy = null)
         {
-            var books = _booksService.GetAllBooks();
+            var books = _booksService.GetAllBooks(sortBy);
             return Ok(books);
         }
         // GET: api/books/{id}

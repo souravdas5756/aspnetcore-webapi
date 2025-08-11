@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using my_books.Data;
+using my_books.Extensions;
 using my_books.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
+
+// Use custom exception handler middleware
+app.UseCustomExceptionHandler();
+
 // Seed the database
 using (var scope = app.Services.CreateScope())
 {

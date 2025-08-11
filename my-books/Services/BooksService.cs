@@ -15,9 +15,27 @@ namespace my_books.Services
             _context = context;
         }
 
-        public List<Book> GetAllBooks()
+        public List<Book> GetAllBooks(string sortBy)
         {
-            return _context.Books.ToList();
+            var books = _context.Books.OrderBy(n => n.BookID).ToList();
+            if(sortBy == "newest")
+            {
+                books = books.OrderByDescending(n => n.DateAdded).ToList();
+            }
+            else if (sortBy == "oldest")
+            {
+                books = books.OrderBy(n => n.DateAdded).ToList();
+            }
+            else if (sortBy == "title")
+            {
+                books = books.OrderBy(n => n.Title).ToList();
+            }
+            else if (sortBy == "author")
+            {
+                books = books.OrderBy(n => n.Author).ToList();
+            }
+
+            return books;
         }
         // Get Book by ID
         public Book GetBookById(int id)
