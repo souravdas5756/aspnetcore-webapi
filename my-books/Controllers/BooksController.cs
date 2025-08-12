@@ -12,15 +12,19 @@ namespace my_books.Controllers
     {
         // _booksService is a private field that holds the instance of BooksService
         private readonly BooksService _booksService;
+        private readonly ILogger<BooksController> _logger;
         // Constructor that initializes the BooksService
-        public BooksController(BooksService booksService)
+        public BooksController(BooksService booksService, ILogger<BooksController> logger)
         {
             _booksService = booksService;
+            _logger = logger;
+
         }
         // GET: api/books
         [HttpGet("get-all-books")]
         public IActionResult GetBooks(string sortBy = null)
         {
+            _logger.LogInformation("Fetching all books with sorting option: {SortBy}", sortBy);
             var books = _booksService.GetAllBooks(sortBy);
             return Ok(books);
         }
@@ -28,6 +32,7 @@ namespace my_books.Controllers
         [HttpGet("{id}")]
         public IActionResult GetBookById(int id)
         {
+            _logger.LogInformation("Fetching book with ID: {Id}", id);
             var book = _booksService.GetBookById(id);
             if (book == null)
             {
@@ -39,6 +44,7 @@ namespace my_books.Controllers
         [HttpPost("add-book")]
         public IActionResult AddBook([FromBody] BookVM book)
         {
+            _logger.LogInformation("Adding a new book: {@Book}", book);
             if (book == null)
             {
                 return BadRequest("Book data is null.");
@@ -50,6 +56,7 @@ namespace my_books.Controllers
         [HttpPut("update-book/{id}")]
         public IActionResult UpdateBook(int id, [FromBody] BookVM book)
         {
+            _logger.LogInformation("Updating book with ID: {Id}, Data: {@Book}", id, book);
             if (book == null)
             {
                 return BadRequest("Book data is null.");
@@ -66,6 +73,7 @@ namespace my_books.Controllers
         [HttpDelete("delete-book/{id}")]
         public IActionResult DeleteBook(int id)
         {
+            _logger.LogInformation("Deleting book with ID: {Id}", id);
             var book = _booksService.GetBookById(id);
             if (book == null)
             {
