@@ -2,11 +2,18 @@ using Microsoft.EntityFrameworkCore;
 using my_books.Data;
 using my_books.Extensions;
 using my_books.Services;
+using Serilog;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
 
+
+// Add services to the container.
+builder.Host.UseSerilog(); // Use Serilog for logging
 builder.Services.AddControllers();
 // Register BooksService for dependency injection
 builder.Services.AddScoped<BooksService>();
