@@ -12,7 +12,7 @@ using my_books.Data;
 namespace my_books.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250809155916_InitialDatabaseMigration")]
+    [Migration("20250812122021_InitialDatabaseMigration")]
     partial class InitialDatabaseMigration
     {
         /// <inheritdoc />
@@ -38,20 +38,18 @@ namespace my_books.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CoverUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateAdded")
+                    b.Property<DateTime?>("DateAdded")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateRead")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsRead")
+                    b.Property<bool?>("IsRead")
                         .HasColumnType("bit");
 
                     b.Property<int?>("Rate")
