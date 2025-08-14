@@ -35,20 +35,18 @@ namespace my_books.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CoverUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateAdded")
+                    b.Property<DateTime?>("DateAdded")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateRead")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsRead")
+                    b.Property<bool?>("IsRead")
                         .HasColumnType("bit");
 
                     b.Property<int?>("Rate")
